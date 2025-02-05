@@ -44,7 +44,7 @@ x-default-isaac-lab-volumes: &default-isaac-lab-volumes
     source: ../tools
     target: ${DOCKER_ISAACLAB_PATH}/tools
   - type: bind
-    source: ../../OmniDrones
+    source: ../../MarineGym
     target: ${DOCKER_MARINEGYM_PATH}
     # The effect of these volumes is twofold:
     # 1. Prevent root-owned files from flooding the _build and logs dir
