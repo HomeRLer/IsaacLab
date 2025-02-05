@@ -44,8 +44,8 @@ x-default-isaac-lab-volumes: &default-isaac-lab-volumes
     source: ../tools
     target: ${DOCKER_ISAACLAB_PATH}/tools
   - type: bind
-    source: ../../OmniDrones
-    target: ${DOCKER_MARINEGYM_PATH}
+    source: ../OmniDrones
+    target: ${DOCKER_ISAACLAB_PATH}/OmniDrones
     # The effect of these volumes is twofold:
     # 1. Prevent root-owned files from flooding the _build and logs dir
     #    on the host machine
@@ -75,7 +75,7 @@ x-default-isaac-lab-deploy: &default-isaac-lab-deploy
 
 services:
   # This service is the base Isaac Lab image
-  marine-gym:
+  isaac-lab-base:
     profiles: [ "base" ]
     env_file: .env.base
     build:
@@ -87,9 +87,8 @@ services:
         - ISAACSIM_ROOT_PATH_ARG=${DOCKER_ISAACSIM_ROOT_PATH}
         - ISAACLAB_PATH_ARG=${DOCKER_ISAACLAB_PATH}
         - DOCKER_USER_HOME_ARG=${DOCKER_USER_HOME}
-        - MARINEGYM_PATH_ARG=${DOCKER_MARINEGYM_PATH}
-    image: marine-gym
-    container_name: marine-gym
+    image: isaac-lab-base
+    container_name: isaac-lab-base
     environment: *default-isaac-lab-environment
     volumes: *default-isaac-lab-volumes
     network_mode: host
